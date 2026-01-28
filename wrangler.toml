@@ -1,0 +1,21 @@
+name = "memory-cards"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+ENVIRONMENT = "production"
+
+# D1 Database - create with: wrangler d1 create memory-cards-db
+[[d1_databases]]
+binding = "DB"
+database_name = "memory-cards-db"
+database_id = "TODO_ADD_DATABASE_ID"
+
+# KV Namespaces - create with: wrangler kv:namespace create SESSIONS
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "TODO_ADD_KV_ID"
+
+# Development environment
+[env.dev]
+vars = { ENVIRONMENT = "development" }
