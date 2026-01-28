@@ -80,11 +80,29 @@ export async function createCard(
   };
 }
 
+// Map DB row to MemoryCard (snake_case -> camelCase)
+function mapCard(row: Record<string, unknown>): MemoryCard {
+  return {
+    id: row.id as string,
+    userId: row.user_id as string,
+    title: row.title as string,
+    quote: row.quote as string,
+    context: row.context as string | null,
+    type: row.type as CardType,
+    style: row.style as 'postcard',
+    conversationId: row.conversation_id as string | null,
+    createdAt: row.created_at as string,
+    updatedAt: row.updated_at as string,
+  };
+}
+
 export async function getCard(db: D1Database, cardId: string): Promise<MemoryCard | null> {
-  return db
+  const row = await db
     .prepare('SELECT * FROM cards WHERE id = ?')
     .bind(cardId)
-    .first<MemoryCard>();
+    .first<Record<string, unknown>>();
+
+  return row ? mapCard(row) : null;
 }
 
 export async function getCards(
@@ -113,7 +131,7 @@ export async function getCards(
   const result = await db
     .prepare(query)
     .bind(...params)
-    .all<MemoryCard>();
+    .all<Record<string, unknown>>();
 
   // Get total count
   let countQuery = 'SELECT COUNT(*) as count FROM cards WHERE user_id = ?';
@@ -130,7 +148,7 @@ export async function getCards(
     .first<{ count: number }>();
 
   return {
-    cards: result.results || [],
+    cards: (result.results || []).map(mapCard),
     total: countResult?.count || 0,
   };
 }

@@ -282,10 +282,14 @@ app.post('/mcp', async (c) => {
               return c.json(respondError(-32602, 'Card not found'));
             }
 
+            const dateStr = card.createdAt
+              ? new Date(card.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+              : 'Unknown date';
+
             return c.json(respond({
               content: [{
                 type: 'text',
-                text: `"${card.quote}"\n\n— ${card.type}, ${new Date(card.createdAt).toLocaleDateString()}`,
+                text: `"${card.quote}"\n\n— ${card.type}, ${dateStr}`,
               }],
               _meta: {
                 ui: {
