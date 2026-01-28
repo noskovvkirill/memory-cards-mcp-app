@@ -1,0 +1,338 @@
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-primary: var(--mcp-ui-bg-primary, #ffffff);
+  --bg-secondary: var(--mcp-ui-bg-secondary, #f5f5f5);
+  --fg-primary: var(--mcp-ui-fg-primary, #1a1a1a);
+  --fg-secondary: var(--mcp-ui-fg-secondary, #666666);
+  --border-color: var(--mcp-ui-border-color, #e0e0e0);
+  --accent-color: var(--mcp-ui-accent-color, #3B82F6);
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--fg-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container */
+.container {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--fg-primary);
+}
+
+.header p {
+  font-size: 14px;
+  color: var(--fg-secondary);
+  margin-top: 4px;
+}
+
+/* Card Component */
+.card {
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card[role="button"] {
+  cursor: pointer;
+}
+
+.card[role="button"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card--small {
+  aspect-ratio: 3 / 4;
+  padding: 12px;
+  min-height: 200px;
+}
+
+.card__header {
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.card--small .card__header {
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.card__title {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.9;
+  text-align: center;
+  padding: 0 8px;
+}
+
+.card--small .card__title {
+  font-size: 11px;
+}
+
+.card__body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.card__quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+  width: 100%;
+}
+
+.card--small .card__quote {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  opacity: 0.9;
+  margin-top: 16px;
+}
+
+.card--small .card__footer {
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+.card__type {
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Card Grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 16px 0;
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg-secondary);
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-family: var(--font-sans);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  color: var(--fg-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn {
+  flex: 1;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn--primary {
+  background: var(--accent-color);
+  color: white;
+}
+
+.btn--secondary {
+  background: var(--bg-secondary);
+  color: var(--fg-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn--danger {
+  background: #EF4444;
+  color: white;
+}
+
+/* Filter Tabs */
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0;
+  margin-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-tab {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 20px;
+  background: var(--bg-secondary);
+  color: var(--fg-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.filter-tab:hover {
+  background: var(--border-color);
+}
+
+.filter-tab--active {
+  background: var(--accent-color);
+  color: white;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--fg-secondary);
+}
+
+.empty-state__icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.empty-state__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--fg-primary);
+  margin-bottom: 8px;
+}
+
+.empty-state__description {
+  font-size: 14px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+
+.loading__spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Card Detail Actions */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.card-actions .btn {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 14px;
+}

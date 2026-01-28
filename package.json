@@ -6,13 +6,12 @@
   "workspaces": ["ui"],
   "scripts": {
     "dev": "wrangler dev",
-    "dev:ui": "bun --cwd ui run dev",
-    "build": "bun run build:ui && wrangler deploy --dry-run",
-    "build:ui": "bun --cwd ui run build",
-    "deploy": "bun run build:ui && wrangler deploy",
+    "dev:ui": "cd ui && bun run dev",
+    "build": "cd ui && bun run build",
+    "deploy": "cd ui && bun run build && cd .. && wrangler deploy",
     "db:migrate": "wrangler d1 execute memory-cards-db --file=./src/db/migrations/001_initial.sql",
     "db:migrate:local": "wrangler d1 execute memory-cards-db --local --file=./src/db/migrations/001_initial.sql",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit && cd ui && bun run typecheck"
   },
   "dependencies": {
     "hono": "^4.0.0",
